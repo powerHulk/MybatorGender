@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--add by myBatisTool t_nlife_con-->
+<mapper namespace="com.cic.partner.manager.mybatis.model.NlifeCon">
+	<resultMap id="nlifeConMap" type="nlifeCon">
+		<id property="prodCode" column="PROD_CODE"/>
+		<id property="companyCode" column="COMPANY_CODE"/>
+		<result property="companyName" column="COMPANY_NAME"/>
+		<result property="companyType" column="COMPANY_TYPE"/>
+		<result property="chiefFlag" column="CHIEF_FLAG"/>
+		<result property="conRate" column="CON_RATE"/>
+		<result property="operUser" column="OPER_USER"/>
+		<result property="operTime" column="OPER_TIME"/>
+	</resultMap>
+	<!-- add Condition t_nlife_con-->
+	<sql id="t_nlife_conCondition">
+		<where>
+			<if test="prodCode != null"> and PROD_CODE=#{prodCode}</if>
+			<if test="companyCode != null"> and COMPANY_CODE=#{companyCode}</if>
+			<if test="companyName != null"> and COMPANY_NAME=#{companyName}</if>
+			<if test="companyType != null"> and COMPANY_TYPE=#{companyType}</if>
+			<if test="chiefFlag != null"> and CHIEF_FLAG=#{chiefFlag}</if>
+			<if test="conRate != null"> and CON_RATE=#{conRate}</if>
+			<if test="operUser != null"> and OPER_USER=#{operUser}</if>
+			<if test="operTime != null"> and OPER_TIME=#{operTime}</if>
+		</where>
+	</sql>
+	<!-- add method queryNlifeConById-->
+	<!-- more than one prmry key, please user selectByMap-->
+	<!-- add method queryNlifeConByMap-->
+	<select id="queryNlifeConByMap" resultMap="nlifeConMap" parameterType="map">
+ 		select * from t_nlife_con
+		<include refid="t_nlife_conCondition"/>
+	</select>
+	<!-- add method insertNlifeCon-->
+	<insert id="insertNlifeCon" parameterType="NlifeCon">
+  		insert into  t_nlife_con(
+				PROD_CODE,
+				COMPANY_CODE,
+				COMPANY_NAME,
+				COMPANY_TYPE,
+				CHIEF_FLAG,
+				CON_RATE,
+				OPER_USER,
+				OPER_TIME) values(
+				#{prodCode,jdbcType=VARCHAR},
+				#{companyCode,jdbcType=VARCHAR},
+				#{companyName,jdbcType=VARCHAR},
+				#{companyType,jdbcType=VARCHAR},
+				#{chiefFlag,jdbcType=VARCHAR},
+				#{conRate,jdbcType=DECIMAL},
+				#{operUser,jdbcType=BIGINT},
+				#{operTime,jdbcType=TIMESTAMP})</insert>
+	<!-- add method updateNlifeCon-->
+	<update id="updateNlifeCon" parameterType="NlifeCon">
+  		 update   t_nlife_con set
+			COMPANY_NAME=#{companyName,jdbcType=VARCHAR},
+			COMPANY_TYPE=#{companyType,jdbcType=VARCHAR},
+			CHIEF_FLAG=#{chiefFlag,jdbcType=VARCHAR},
+			CON_RATE=#{conRate,jdbcType=DECIMAL},
+			OPER_USER=#{operUser,jdbcType=BIGINT},
+			OPER_TIME=#{operTime,jdbcType=TIMESTAMP}
+			where 
+ 	 		PROD_CODE=#{prodCode}
+			 and COMPANY_CODE=#{companyCode}</update>
+	<!-- add method updateNlifeConNotNull only not null fields updated-->
+	<update id="updateNlifeConNotNull" parameterType="NlifeCon">
+  		 update   t_nlife_con
+		<set>
+			<if test="companyName != null"> COMPANY_NAME=#{companyName},</if>
+			<if test="companyType != null"> COMPANY_TYPE=#{companyType},</if>
+			<if test="chiefFlag != null"> CHIEF_FLAG=#{chiefFlag},</if>
+			<if test="conRate != null"> CON_RATE=#{conRate},</if>
+			<if test="operUser != null"> OPER_USER=#{operUser},</if>
+			<if test="operTime != null"> OPER_TIME=#{operTime},</if>
+		</set>
+			where 
+ 	 		PROD_CODE=#{prodCode}
+			 and COMPANY_CODE=#{companyCode}
+	</update>
+	<!-- delete method delNlifeConById-->
+	<delete id="delNlifeConById" parameterType="NlifeCon">
+ 		delete t_nlife_con
+			where PROD_CODE=#{prodCode}
+			and COMPANY_CODE=#{companyCode}</delete>
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--add by myBatisTool t_nlife_cov-->
+<mapper namespace="com.cic.partner.manager.mybatis.model.NlifeCov">
+	<resultMap id="nlifeCovMap" type="nlifeCov">
+		<id property="prodCode" column="PROD_CODE"/>
+		<id property="coreRiskCode" column="CORE_RISK_CODE"/>
+		<id property="coreCovCode" column="CORE_COV_CODE"/>
+		<result property="parentCov" column="PARENT_COV"/>
+		<result property="covName" column="COV_NAME"/>
+		<result property="covAmt" column="COV_AMT"/>
+		<result property="isInputAmount" column="IS_INPUT_AMOUNT"/>
+		<result property="noCalimAmount" column="NO_CALIM_AMOUNT"/>
+		<result property="claimRate" column="CLAIM_RATE"/>
+		<result property="calId" column="CAL_ID"/>
+	</resultMap>
+	<!-- add Condition t_nlife_cov-->
+	<sql id="t_nlife_covCondition">
+		<where>
+			<if test="prodCode != null"> and PROD_CODE=#{prodCode}</if>
+			<if test="coreRiskCode != null"> and CORE_RISK_CODE=#{coreRiskCode}</if>
+			<if test="coreCovCode != null"> and CORE_COV_CODE=#{coreCovCode}</if>
+			<if test="parentCov != null"> and PARENT_COV=#{parentCov}</if>
+			<if test="covName != null"> and COV_NAME=#{covName}</if>
+			<if test="covAmt != null"> and COV_AMT=#{covAmt}</if>
+			<if test="isInputAmount != null"> and IS_INPUT_AMOUNT=#{isInputAmount}</if>
+			<if test="noCalimAmount != null"> and NO_CALIM_AMOUNT=#{noCalimAmount}</if>
+			<if test="claimRate != null"> and CLAIM_RATE=#{claimRate}</if>
+			<if test="calId != null"> and CAL_ID=#{calId}</if>
+		</where>
+	</sql>
+	<!-- add method queryNlifeCovById-->
+	<!-- more than one prmry key, please user selectByMap-->
+	<!-- add method queryNlifeCovByMap-->
+	<select id="queryNlifeCovByMap" resultMap="nlifeCovMap" parameterType="map">
+ 		select * from t_nlife_cov
+		<include refid="t_nlife_covCondition"/>
+	</select>
+	<!-- add method insertNlifeCov-->
+	<insert id="insertNlifeCov" parameterType="NlifeCov">
+  		insert into  t_nlife_cov(
+				PROD_CODE,
+				CORE_RISK_CODE,
+				CORE_COV_CODE,
+				PARENT_COV,
+				COV_NAME,
+				COV_AMT,
+				IS_INPUT_AMOUNT,
+				NO_CALIM_AMOUNT,
+				CLAIM_RATE,
+				CAL_ID) values(
+				#{prodCode,jdbcType=VARCHAR},
+				#{coreRiskCode,jdbcType=VARCHAR},
+				#{coreCovCode,jdbcType=VARCHAR},
+				#{parentCov,jdbcType=VARCHAR},
+				#{covName,jdbcType=VARCHAR},
+				#{covAmt,jdbcType=DECIMAL},
+				#{isInputAmount,jdbcType=VARCHAR},
+				#{noCalimAmount,jdbcType=DECIMAL},
+				#{claimRate,jdbcType=DECIMAL},
+				#{calId,jdbcType=VARCHAR})</insert>
+	<!-- add method updateNlifeCov-->
+	<update id="updateNlifeCov" parameterType="NlifeCov">
+  		 update   t_nlife_cov set
+			PARENT_COV=#{parentCov,jdbcType=VARCHAR},
+			COV_NAME=#{covName,jdbcType=VARCHAR},
+			COV_AMT=#{covAmt,jdbcType=DECIMAL},
+			IS_INPUT_AMOUNT=#{isInputAmount,jdbcType=VARCHAR},
+			NO_CALIM_AMOUNT=#{noCalimAmount,jdbcType=DECIMAL},
+			CLAIM_RATE=#{claimRate,jdbcType=DECIMAL},
+			CAL_ID=#{calId,jdbcType=VARCHAR}
+			where 
+ 	 		PROD_CODE=#{prodCode}
+			 and CORE_RISK_CODE=#{coreRiskCode}
+			 and CORE_COV_CODE=#{coreCovCode}</update>
+	<!-- add method updateNlifeCovNotNull only not null fields updated-->
+	<update id="updateNlifeCovNotNull" parameterType="NlifeCov">
+  		 update   t_nlife_cov
+		<set>
+			<if test="parentCov != null"> PARENT_COV=#{parentCov},</if>
+			<if test="covName != null"> COV_NAME=#{covName},</if>
+			<if test="covAmt != null"> COV_AMT=#{covAmt},</if>
+			<if test="isInputAmount != null"> IS_INPUT_AMOUNT=#{isInputAmount},</if>
+			<if test="noCalimAmount != null"> NO_CALIM_AMOUNT=#{noCalimAmount},</if>
+			<if test="claimRate != null"> CLAIM_RATE=#{claimRate},</if>
+			<if test="calId != null"> CAL_ID=#{calId},</if>
+		</set>
+			where 
+ 	 		PROD_CODE=#{prodCode}
+			 and CORE_RISK_CODE=#{coreRiskCode}
+			 and CORE_COV_CODE=#{coreCovCode}
+	</update>
+	<!-- delete method delNlifeCovById-->
+	<delete id="delNlifeCovById" parameterType="NlifeCov">
+ 		delete t_nlife_cov
+			where PROD_CODE=#{prodCode}
+			and CORE_RISK_CODE=#{coreRiskCode}
+			and CORE_COV_CODE=#{coreCovCode}</delete>
+</mapper>

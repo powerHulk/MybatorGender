@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--add by myBatisTool t_nlife_risk-->
+<mapper namespace="com.cic.partner.manager.mybatis.model.NlifeRisk">
+	<resultMap id="nlifeRiskMap" type="nlifeRisk">
+		<id property="prodCode" column="PROD_CODE"/>
+		<id property="coreRiskCode" column="CORE_RISK_CODE"/>
+		<result property="riskName" column="RISK_NAME"/>
+		<result property="prmryFlag" column="PRMRY_FLAG"/>
+	</resultMap>
+	<!-- add Condition t_nlife_risk-->
+	<sql id="t_nlife_riskCondition">
+		<where>
+			<if test="prodCode != null"> and PROD_CODE=#{prodCode}</if>
+			<if test="coreRiskCode != null"> and CORE_RISK_CODE=#{coreRiskCode}</if>
+			<if test="riskName != null"> and RISK_NAME=#{riskName}</if>
+			<if test="prmryFlag != null"> and PRMRY_FLAG=#{prmryFlag}</if>
+		</where>
+	</sql>
+	<!-- add method queryNlifeRiskById-->
+	<!-- more than one prmry key, please user selectByMap-->
+	<!-- add method queryNlifeRiskByMap-->
+	<select id="queryNlifeRiskByMap" resultMap="nlifeRiskMap" parameterType="map">
+ 		select * from t_nlife_risk
+		<include refid="t_nlife_riskCondition"/>
+	</select>
+	<!-- add method insertNlifeRisk-->
+	<insert id="insertNlifeRisk" parameterType="NlifeRisk">
+  		insert into  t_nlife_risk(
+				PROD_CODE,
+				CORE_RISK_CODE,
+				RISK_NAME,
+				PRMRY_FLAG) values(
+				#{prodCode,jdbcType=VARCHAR},
+				#{coreRiskCode,jdbcType=VARCHAR},
+				#{riskName,jdbcType=VARCHAR},
+				#{prmryFlag,jdbcType=VARCHAR})</insert>
+	<!-- add method updateNlifeRisk-->
+	<update id="updateNlifeRisk" parameterType="NlifeRisk">
+  		 update   t_nlife_risk set
+			RISK_NAME=#{riskName,jdbcType=VARCHAR},
+			PRMRY_FLAG=#{prmryFlag,jdbcType=VARCHAR}
+			where 
+ 	 		PROD_CODE=#{prodCode}
+			 and CORE_RISK_CODE=#{coreRiskCode}</update>
+	<!-- add method updateNlifeRiskNotNull only not null fields updated-->
+	<update id="updateNlifeRiskNotNull" parameterType="NlifeRisk">
+  		 update   t_nlife_risk
+		<set>
+			<if test="riskName != null"> RISK_NAME=#{riskName},</if>
+			<if test="prmryFlag != null"> PRMRY_FLAG=#{prmryFlag},</if>
+		</set>
+			where 
+ 	 		PROD_CODE=#{prodCode}
+			 and CORE_RISK_CODE=#{coreRiskCode}
+	</update>
+	<!-- delete method delNlifeRiskById-->
+	<delete id="delNlifeRiskById" parameterType="NlifeRisk">
+ 		delete t_nlife_risk
+			where PROD_CODE=#{prodCode}
+			and CORE_RISK_CODE=#{coreRiskCode}</delete>
+</mapper>

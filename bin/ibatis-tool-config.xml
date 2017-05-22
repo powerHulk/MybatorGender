@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<jdbc jdbc.driverClassName="oracle.jdbc.driver.OracleDriver"
+		jdbc.url="jdbc:oracle:thin:@10.196.12.21:1521:thzjyora"
+		jdbc.username="sit_user" jdbc.password="oracle" />
+	<set>
+		<!-- 是否替换掉已经存在的文件 -->
+		<replace>true</replace>
+		<createSequence>false</createSequence>
+		<!-- 
+			将要生成所在项目的SRC文件夹
+			../aimi/src/ 
+			必须要在同一个工作环境下
+			如果直接写 src/ 则生成到工具的目录下
+		-->
+		<src>src/</src>
+		<modelName></modelName>
+<!-- 		<modelpackage>com.cic.partner.facade.mybatis.model</modelpackage> -->
+<!-- 		<xmlpackage>com.cic.partner.facade.mybatis.conf</xmlpackage> -->
+		<modelpackage>com.cic.partner.manager.mybatis.model</modelpackage>
+		<xmlpackage>com.cic.partner.manager.mybatis.conf</xmlpackage>
+	</set>
+	<!-- 如果有seq则用seq生成 主键-->
+	<tables>
+	<table>T_NLIFE_PROD</table>
+	<table>T_NLIFE_RISK</table>
+	<table>T_NLIFE_COV</table>
+	<table>T_NLIFE_CON</table>
+	<!-- 
+	t_gateway_facade_user_channel
+	<table>t_gateway_channel_info</table>
+	<table>T_TRAD_PROD_INST</table> -->
+	<!-- 
+	<table>t_gateway_channel_info</table>
+	<table seq="s_gateway_menu_uri">t_gateway_menu_uri</table>
+	<table>t_core_dept</table>
+	<table>t_trad_ID_CODE</table>
+	<table seq="S_GATEWAY_APP_TRANSTYPE">t_gateway_app_transtype</table>
+		<table seq="seq_sms_bpm">t_sms_bpm</table>
+		 -->
+	</tables>
+
+
+
+
+</config>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--add by myBatisTool t_nlife_prod-->
+<mapper namespace="com.cic.partner.manager.mybatis.model.NlifeProd">
+	<resultMap id="nlifeProdMap" type="nlifeProd">
+		<id property="prodCode" column="PROD_CODE"/>
+		<result property="prodName" column="PROD_NAME"/>
+		<result property="coreProdCode" column="CORE_PROD_CODE"/>
+		<result property="appType" column="APP_TYPE"/>
+		<result property="instant" column="INSTANT"/>
+		<result property="maxDelayDay" column="MAX_DELAY_DAY"/>
+		<result property="minDelayDay" column="MIN_DELAY_DAY"/>
+		<result property="maxDays" column="MAX_DAYS"/>
+		<result property="minDays" column="MIN_DAYS"/>
+		<result property="pppUnit" column="PPP_UNIT"/>
+		<result property="maxNumber" column="MAX_NUMBER"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="prodType" column="PROD_TYPE"/>
+		<result property="poolType" column="POOL_TYPE"/>
+		<result property="ageLimit" column="AGE_LIMIT"/>
+		<result property="minAge" column="MIN_AGE"/>
+		<result property="maxAge" column="MAX_AGE"/>
+		<result property="maxOccupLevel" column="MAX_OCCUP_LEVEL"/>
+		<result property="insuredNoLimit" column="INSURED_NO_LIMIT"/>
+		<result property="minInsuredNo" column="MIN_INSURED_NO"/>
+		<result property="agentType" column="AGENT_TYPE"/>
+		<result property="operTime" column="OPER_TIME"/>
+	</resultMap>
+	<!-- add Condition t_nlife_prod-->
+	<sql id="t_nlife_prodCondition">
+		<where>
+			<if test="prodCode != null"> and PROD_CODE=#{prodCode}</if>
+			<if test="prodName != null"> and PROD_NAME=#{prodName}</if>
+			<if test="coreProdCode != null"> and CORE_PROD_CODE=#{coreProdCode}</if>
+			<if test="appType != null"> and APP_TYPE=#{appType}</if>
+			<if test="instant != null"> and INSTANT=#{instant}</if>
+			<if test="maxDelayDay != null"> and MAX_DELAY_DAY=#{maxDelayDay}</if>
+			<if test="minDelayDay != null"> and MIN_DELAY_DAY=#{minDelayDay}</if>
+			<if test="maxDays != null"> and MAX_DAYS=#{maxDays}</if>
+			<if test="minDays != null"> and MIN_DAYS=#{minDays}</if>
+			<if test="pppUnit != null"> and PPP_UNIT=#{pppUnit}</if>
+			<if test="maxNumber != null"> and MAX_NUMBER=#{maxNumber}</if>
+			<if test="startDate != null"> and START_DATE=#{startDate}</if>
+			<if test="status != null"> and STATUS=#{status}</if>
+			<if test="prodType != null"> and PROD_TYPE=#{prodType}</if>
+			<if test="poolType != null"> and POOL_TYPE=#{poolType}</if>
+			<if test="ageLimit != null"> and AGE_LIMIT=#{ageLimit}</if>
+			<if test="minAge != null"> and MIN_AGE=#{minAge}</if>
+			<if test="maxAge != null"> and MAX_AGE=#{maxAge}</if>
+			<if test="maxOccupLevel != null"> and MAX_OCCUP_LEVEL=#{maxOccupLevel}</if>
+			<if test="insuredNoLimit != null"> and INSURED_NO_LIMIT=#{insuredNoLimit}</if>
+			<if test="minInsuredNo != null"> and MIN_INSURED_NO=#{minInsuredNo}</if>
+			<if test="agentType != null"> and AGENT_TYPE=#{agentType}</if>
+			<if test="operTime != null"> and OPER_TIME=#{operTime}</if>
+		</where>
+	</sql>
+	<!-- add method queryNlifeProdById-->
+	<select id="queryNlifeProdById" resultMap="nlifeProdMap" parameterType="string">
+ 		select * from t_nlife_prod
+  		where 
+ 	 		PROD_CODE = #{value}</select>
+	<!-- add method queryNlifeProdByMap-->
+	<select id="queryNlifeProdByMap" resultMap="nlifeProdMap" parameterType="map">
+ 		select * from t_nlife_prod
+		<include refid="t_nlife_prodCondition"/>
+	</select>
+	<!-- add method insertNlifeProd-->
+	<insert id="insertNlifeProd" parameterType="NlifeProd">
+  		insert into  t_nlife_prod(
+				PROD_CODE,
+				PROD_NAME,
+				CORE_PROD_CODE,
+				APP_TYPE,
+				INSTANT,
+				MAX_DELAY_DAY,
+				MIN_DELAY_DAY,
+				MAX_DAYS,
+				MIN_DAYS,
+				PPP_UNIT,
+				MAX_NUMBER,
+				START_DATE,
+				STATUS,
+				PROD_TYPE,
+				POOL_TYPE,
+				AGE_LIMIT,
+				MIN_AGE,
+				MAX_AGE,
+				MAX_OCCUP_LEVEL,
+				INSURED_NO_LIMIT,
+				MIN_INSURED_NO,
+				AGENT_TYPE,
+				OPER_TIME) values(
+				#{prodCode,jdbcType=VARCHAR},
+				#{prodName,jdbcType=VARCHAR},
+				#{coreProdCode,jdbcType=VARCHAR},
+				#{appType,jdbcType=VARCHAR},
+				#{instant,jdbcType=VARCHAR},
+				#{maxDelayDay,jdbcType=BIGINT},
+				#{minDelayDay,jdbcType=BIGINT},
+				#{maxDays,jdbcType=BIGINT},
+				#{minDays,jdbcType=BIGINT},
+				#{pppUnit,jdbcType=VARCHAR},
+				#{maxNumber,jdbcType=BIGINT},
+				#{startDate,jdbcType=TIMESTAMP},
+				#{status,jdbcType=VARCHAR},
+				#{prodType,jdbcType=VARCHAR},
+				#{poolType,jdbcType=VARCHAR},
+				#{ageLimit,jdbcType=VARCHAR},
+				#{minAge,jdbcType=INTEGER},
+				#{maxAge,jdbcType=INTEGER},
+				#{maxOccupLevel,jdbcType=VARCHAR},
+				#{insuredNoLimit,jdbcType=VARCHAR},
+				#{minInsuredNo,jdbcType=INTEGER},
+				#{agentType,jdbcType=VARCHAR},
+				#{operTime,jdbcType=TIMESTAMP})</insert>
+	<!-- add method updateNlifeProd-->
+	<update id="updateNlifeProd" parameterType="NlifeProd">
+  		 update   t_nlife_prod set
+			PROD_NAME=#{prodName,jdbcType=VARCHAR},
+			CORE_PROD_CODE=#{coreProdCode,jdbcType=VARCHAR},
+			APP_TYPE=#{appType,jdbcType=VARCHAR},
+			INSTANT=#{instant,jdbcType=VARCHAR},
+			MAX_DELAY_DAY=#{maxDelayDay,jdbcType=BIGINT},
+			MIN_DELAY_DAY=#{minDelayDay,jdbcType=BIGINT},
+			MAX_DAYS=#{maxDays,jdbcType=BIGINT},
+			MIN_DAYS=#{minDays,jdbcType=BIGINT},
+			PPP_UNIT=#{pppUnit,jdbcType=VARCHAR},
+			MAX_NUMBER=#{maxNumber,jdbcType=BIGINT},
+			START_DATE=#{startDate,jdbcType=TIMESTAMP},
+			STATUS=#{status,jdbcType=VARCHAR},
+			PROD_TYPE=#{prodType,jdbcType=VARCHAR},
+			POOL_TYPE=#{poolType,jdbcType=VARCHAR},
+			AGE_LIMIT=#{ageLimit,jdbcType=VARCHAR},
+			MIN_AGE=#{minAge,jdbcType=INTEGER},
+			MAX_AGE=#{maxAge,jdbcType=INTEGER},
+			MAX_OCCUP_LEVEL=#{maxOccupLevel,jdbcType=VARCHAR},
+			INSURED_NO_LIMIT=#{insuredNoLimit,jdbcType=VARCHAR},
+			MIN_INSURED_NO=#{minInsuredNo,jdbcType=INTEGER},
+			AGENT_TYPE=#{agentType,jdbcType=VARCHAR},
+			OPER_TIME=#{operTime,jdbcType=TIMESTAMP}
+			where 
+ 	 		PROD_CODE=#{prodCode}</update>
+	<!-- add method updateNlifeProdNotNull only not null fields updated-->
+	<update id="updateNlifeProdNotNull" parameterType="NlifeProd">
+  		 update   t_nlife_prod
+		<set>
+			<if test="prodName != null"> PROD_NAME=#{prodName},</if>
+			<if test="coreProdCode != null"> CORE_PROD_CODE=#{coreProdCode},</if>
+			<if test="appType != null"> APP_TYPE=#{appType},</if>
+			<if test="instant != null"> INSTANT=#{instant},</if>
+			<if test="maxDelayDay != null"> MAX_DELAY_DAY=#{maxDelayDay},</if>
+			<if test="minDelayDay != null"> MIN_DELAY_DAY=#{minDelayDay},</if>
+			<if test="maxDays != null"> MAX_DAYS=#{maxDays},</if>
+			<if test="minDays != null"> MIN_DAYS=#{minDays},</if>
+			<if test="pppUnit != null"> PPP_UNIT=#{pppUnit},</if>
+			<if test="maxNumber != null"> MAX_NUMBER=#{maxNumber},</if>
+			<if test="startDate != null"> START_DATE=#{startDate},</if>
+			<if test="status != null"> STATUS=#{status},</if>
+			<if test="prodType != null"> PROD_TYPE=#{prodType},</if>
+			<if test="poolType != null"> POOL_TYPE=#{poolType},</if>
+			<if test="ageLimit != null"> AGE_LIMIT=#{ageLimit},</if>
+			<if test="minAge != null"> MIN_AGE=#{minAge},</if>
+			<if test="maxAge != null"> MAX_AGE=#{maxAge},</if>
+			<if test="maxOccupLevel != null"> MAX_OCCUP_LEVEL=#{maxOccupLevel},</if>
+			<if test="insuredNoLimit != null"> INSURED_NO_LIMIT=#{insuredNoLimit},</if>
+			<if test="minInsuredNo != null"> MIN_INSURED_NO=#{minInsuredNo},</if>
+			<if test="agentType != null"> AGENT_TYPE=#{agentType},</if>
+			<if test="operTime != null"> OPER_TIME=#{operTime},</if>
+		</set>
+			where 
+ 	 		PROD_CODE=#{prodCode}
+	</update>
+	<!-- delete method delNlifeProdById-->
+	<delete id="delNlifeProdById" parameterType="string">
+ 		delete t_nlife_prod
+  		where 
+ 	 		PROD_CODE=#{value}</delete>
+</mapper>
